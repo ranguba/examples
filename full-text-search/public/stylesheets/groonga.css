@@ -62,3 +62,13 @@ div.search-box
   width: 100%;
   text-align: center;
 }
+
+div.re-search
+{
+}
+
+div.records
+{
+  padding-top: 10px;
+  padding-left: 30px;
+}

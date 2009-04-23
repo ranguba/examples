@@ -84,7 +84,8 @@ class DocumentsController < ApplicationController
   end
 
   def search
+    before = Time.now
     @documents = Document.find_all_by_content(params[:query])
-    p @documents
+    @elapsed = Time.now - before
   end
 end

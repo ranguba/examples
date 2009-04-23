@@ -15,7 +15,7 @@ class WikipediaRegister
 
   def page(information)
     @n += 1
-    p [@n, information[:content].size, ActiveGroonga::Schema.index_table.size]
+    p @n
     user = information[:contributor]
     user = nil unless user.is_a?(User)
     Document.create(:title => information[:title],
@@ -23,9 +23,7 @@ class WikipediaRegister
                     :updated_at => information[:timestamp],
                     :user => user,
                     :source => @source)
-    p [:after, information[:content].size, ActiveGroonga::Schema.index_table.size]
-    p :done
-    exit if @n == 300
+    exit if @n == 50
   end
 
   def title(title)

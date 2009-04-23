@@ -1,7 +1,22 @@
-<p><%= h(@documents.size) %>件見つかりました。</p>
+<div class="re-search">
+<% form_tag({:action => "search"}, :method => :get) do -%>
+<p>
+  <%= image_tag("mini-groonga.png", :alt => "groonga") -%>
+  <%= text_field_tag("query", h(params[:query])) %>
+  <%= submit_tag("検索") %>
+</p>
+<% end -%>
+</div>
+
+<div class="search-summary">
+<p><%= h(@documents.size) %>件見つかりました。（<%= @elapsed %>秒）</p>
+</div>
 
 <div class="records">
 <% @documents.each do |document| %>
-<h2><%= h(document.title) %></h2>
+  <div class="record">
+    <h2><%= h(document.title) %></h2>
+    <p class="snippet"><%= h(document.content[0, 100]) %></p>
+  </div>
 <% end %>
 </div>
