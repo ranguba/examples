@@ -1,8 +1,11 @@
 development:
   database: db/development.groonga
+  encoding: utf8
 
 test:
   database: db/test.groonga
+  encoding: utf8
 
 production:
   database: db/production.groonga
+  encoding: utf8

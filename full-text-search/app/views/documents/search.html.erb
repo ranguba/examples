@@ -1,2 +1,7 @@
-<h1>Documents#search</h1>
-<p>Find me in app/views/documents/search.html.erb</p>
+<p><%= h(@documents.size) %>件見つかりました。</p>
+
+<div class="records">
+<% @documents.each do |document| %>
+<h2><%= h(document.title) %></h2>
+<% end %>
+</div>

@@ -82,4 +82,9 @@ class DocumentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def search
+    @documents = Document.find_all_by_content(params[:query])
+    p @documents
+  end
 end
