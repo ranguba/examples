@@ -4,6 +4,7 @@ class CreateDocuments < ActiveGroonga::Migration
       t.string :title
       t.text :content
       t.string :version
+      t.string :url
       t.references :user
       t.references :source
 

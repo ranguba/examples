@@ -4,6 +4,8 @@ class CreateSources < ActiveGroonga::Migration
       t.string :name
       t.text :description
       t.string :url
+      t.string :license
+      t.string :license_url
 
       t.timestamps
     end

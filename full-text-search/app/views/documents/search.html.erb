@@ -9,14 +9,32 @@
 </div>
 
 <div class="search-summary">
-<p><%= h(@documents.size) %>件見つかりました。（<%= @elapsed %>秒）</p>
+  <p>
+    <span class="keyword"><%= h(params[:query]) %></span>の検索結果:
+    <%= h(@documents.size) %>件見つかりました。（<%= @elapsed %>秒）
+  </p>
 </div>
 
+<% _snippet = snippet(params[:query]) %>
 <div class="records">
 <% @documents.each do |document| %>
+<%    source = document.source -%>
   <div class="record">
-    <h2><%= h(document.title) %></h2>
-    <p class="snippet"><%= h(document.content[0, 100]) %></p>
+    <h2><%= link_to(h(document.title), document.url) %></h2>
+    <p class="snippet">
+       <%= _snippet.execute(document.content).join("\n<span class=\"separator\">...</span>\n") %>
+    </p>
+    <p class="metadata">
+      <span class="url"><%= h(CGI.unescape(document.url)) %></span>
+      -
+      <span class="content"><%= link_to("内容", document_path(document)) %></span>
+      -
+      <span class="license">
+         <%= link_to(h(source.license), source.license_url) %>
+      </span>
+      -
+      <span class="source"><%= link_to(h(source.name), source.url) %></span>
+    </p>
   </div>
 <% end %>
 </div>

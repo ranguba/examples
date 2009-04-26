@@ -2,6 +2,8 @@
 
 require File.dirname(__FILE__) + '/../config/environment'
 
+require 'erb'
+
 class WikipediaRegister
   def initialize
     @n = 0
@@ -9,21 +11,26 @@ class WikipediaRegister
     if @source.nil?
       @source = Source.create(:name => "Wikipedia (ja)",
                               :description => "Wikipedia in Japanese",
-                              :url => "http://ja.wikipedia.org/")
+                              :url => "http://ja.wikipedia.org/",
+                              :license => "GFDL",
+                              :license_url => "http://ja.wikipedia.org/wiki/Wikipedia:Text_of_GNU_Free_Documentation_License")
     end
   end
 
   def page(information)
     @n += 1
-    p @n
+    title = information[:title]
+    url = "http://ja.wikipedia.org/wiki/#{ERB::Util.url_encode(title)}"
+    p [@n, title]
     user = information[:contributor]
     user = nil unless user.is_a?(User)
     Document.create(:title => information[:title],
                     :content => information[:content],
                     :updated_at => information[:timestamp],
                     :user => user,
-                    :source => @source)
-    exit if @n == 50
+                    :source => @source,
+                    :url => url)
+    exit if @n == 1000
   end
 
   def title(title)
