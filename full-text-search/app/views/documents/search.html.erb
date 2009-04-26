@@ -3,7 +3,7 @@
 <div class="search-summary">
   <p>
     <span class="keyword"><%= h(params[:query]) %></span>の検索結果:
-    <%= h(@documents.size) %>件見つかりました。（<%= @elapsed %>秒）
+    <%= h(@n_documents) %>件見つかりました。（<%= @elapsed %>秒）
   </p>
 </div>
 
