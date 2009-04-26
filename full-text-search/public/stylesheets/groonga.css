@@ -1,51 +1,7 @@
-body { background-color: #fff; color: #333; }
-
-body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
-}
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-.fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#errorExplanation {
-  width: 400px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-}
-
-#errorExplanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  background-color: #c00;
-  color: #fff;
-}
-
-#errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 5px;
-}
-
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: square;
+body
+{
+  background-color: #fff;
+  color: #000;
 }
 
 div.header
@@ -63,11 +19,35 @@ div.re-search
 {
 }
 
+div.search-summary
+{
+  font-size: small;
+  border-top: 1px solid #fc3;
+  background-color: #ffd;
+}
+
+div.search-summary p
+{
+  padding: 3px;
+  margin: 0;
+}
+
 div.records
 {
+  font-size: smaller;
   padding-top: 10px;
   padding-left: 30px;
   margin-right: 30%;
+}
+
+div.records h2
+{
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+div.records p
+{
 }
 
 p.snippet
@@ -91,9 +71,24 @@ p.metadata
 {
   padding: 0;
   margin: 0;
+  margin-top: 5px;
 }
 
 span.url
 {
   color: green;
+}
+
+pre
+{
+  overflow: auto;
+  margin: 20px 30px;
+  padding: 10px;
+  border-top: 1px solid #fc3;
+  background-color: #ffd;
+}
+
+a img
+{
+  border-style: none;
 }

@@ -1,0 +1,9 @@
+<div class="re-search">
+<% form_tag({:action => "search"}, :method => :get) do -%>
+<p>
+  <%= link_to(image_tag("mini-groonga.png", :alt => "groonga"), root_path) -%>
+  <%= text_field_tag("query", h(params[:query])) %>
+  <%= submit_tag("検索") %>
+</p>
+<% end -%>
+</div>

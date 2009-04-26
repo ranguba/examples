@@ -1,3 +1,18 @@
+<%= render(:partial => "re_search_box") %>
 
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Back', documents_path %>
+<% source = @document.source %>
+<div class="document">
+  <h2><%= link_to(h(@document.title), @document.url) %></h2>
+
+  <p class="metadata">
+    <span class="url"><%= h(CGI.unescape(@document.url)) %></span>
+    -
+    <span class="license">
+      <%= link_to(h(source.license), source.license_url) %>
+    </span>
+    -
+    <span class="source"><%= link_to(h(source.name), source.url) %></span>
+  </p>
+
+  <pre class="content"><%= h(@document.content) %></pre>
+</div>

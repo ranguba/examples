@@ -1,12 +1,4 @@
-<div class="re-search">
-<% form_tag({:action => "search"}, :method => :get) do -%>
-<p>
-  <%= image_tag("mini-groonga.png", :alt => "groonga") -%>
-  <%= text_field_tag("query", h(params[:query])) %>
-  <%= submit_tag("検索") %>
-</p>
-<% end -%>
-</div>
+<%= render(:partial => "re_search_box") %>
 
 <div class="search-summary">
   <p>
