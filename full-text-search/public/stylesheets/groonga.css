@@ -38,6 +38,7 @@ div.records
   padding-top: 10px;
   padding-left: 30px;
   margin-right: 30%;
+  margin-bottom: 30px;
 }
 
 div.records h2
@@ -90,4 +91,19 @@ pre
 a img
 {
   border-style: none;
+}
+
+ul.sources
+{
+  font-size: small;
+  border-top: 1px solid #fc3;
+  background-color: #ffd;
+  margin: 0;
+  padding: 3px;
+  padding-left: 10px;
+}
+
+ul.sources li
+{
+  display: inline;
 }

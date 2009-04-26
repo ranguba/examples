@@ -2,11 +2,12 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.xml
   def index
-    @documents = Document.all
-
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @documents }
+      format.html
+      format.xml do
+        @documents = Document.all(:limit => 20)
+        render :xml => @documents
+      end
     end
   end
 
