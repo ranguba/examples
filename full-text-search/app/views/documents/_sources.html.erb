@@ -1,0 +1,8 @@
+<ul class="sources">
+<% Source.all.each do |source| %>
+  <li>
+    <span class="source"><%= link_to(h(source.name), source.url) %></span>
+    <span class="license">（<%= link_to(h(source.license), source.license_url) %>）</span>
+   </li>
+<% end %>
+</ul>
