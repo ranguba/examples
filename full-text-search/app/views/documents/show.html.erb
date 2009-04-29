@@ -6,12 +6,14 @@
 
   <p class="metadata">
     <span class="url"><%= h(CGI.unescape(@document.url)) %></span>
+    <% if source -%>
     -
     <span class="license">
       <%= link_to(h(source.license), source.license_url) %>
     </span>
     -
     <span class="source"><%= link_to(h(source.name), source.url) %></span>
+    <% end -%>
   </p>
 
   <pre class="content"><%= h(@document.content) %></pre>

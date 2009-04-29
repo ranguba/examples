@@ -1,13 +1,15 @@
-one:
-  title: MyString
-  content: MyText
-  version: MyString
+groonga:
+  title: groonga
+  content: groongaは全文検索エンジンとカラムストアライブラリです。
+  url: http://groonga.org/
+  version: 
   user: 
   source: 
 
-two:
-  title: MyString
-  content: MyText
-  version: MyString
+cutter:
+  title: Cutter
+  content: CutterはC言語用単体テストフレームワークです。
+  url: http://cutter.sourceforge.net/ja/
+  version: 1.0.6
   user: 
   source: 

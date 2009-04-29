@@ -3,7 +3,7 @@
 <div class="search-summary">
   <p>
     <span class="keyword"><%= h(params[:query]) %></span>の検索結果:
-    <%= h(@n_documents) %>件見つかりました。（<%= @elapsed %>秒）
+    上位<%= h(@documents.size) %>件を表示（<%= @elapsed %>秒）
   </p>
 </div>
 
@@ -12,7 +12,7 @@
 <% @documents.each do |document| %>
 <%    source = document.source -%>
   <div class="record">
-    <h2><%= link_to(h(document.title), document.url) %></h2>
+    <h2><%= link_to(h(document.title), document.url) %>(<%= document.score %>)</h2>
     <p class="snippet">
        <%= _snippet.execute(document.content).join("\n<span class=\"separator\">...</span>\n") %>
     </p>
@@ -20,12 +20,14 @@
       <span class="url"><%= h(CGI.unescape(document.url)) %></span>
       -
       <span class="content"><%= link_to("内容", document_path(document)) %></span>
+      <% if source -%>
       -
       <span class="license">
          <%= link_to(h(source.license), source.license_url) %>
       </span>
       -
       <span class="source"><%= link_to(h(source.name), source.url) %></span>
+      <% end -%>
     </p>
   </div>
 <% end %>

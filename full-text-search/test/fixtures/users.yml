@@ -1,7 +1,7 @@
-one:
-  original_id: 1
-  name: MyString
+daijiro:
+  original_id: groonga:1
+  name: daijiro
 
-two:
-  original_id: 1
-  name: MyString
+gunyarakun:
+  original_id: groonga:2
+  name: gunyarakun

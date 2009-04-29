@@ -23,9 +23,6 @@ class DocumentsController < ApplicationController
   end
 
   def search
-    @n_documents = Document.count do |query|
-      query.content.include(params[:query])
-    end
     before = Time.now
     @documents = Document.find_all_by_content(params[:query], :limit => 20)
     @elapsed = Time.now - before
