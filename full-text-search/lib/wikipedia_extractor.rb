@@ -44,6 +44,9 @@ class WikipediaExtractor
       end
     end
 
+    def start_element_namespace(name, attrs={}, prefix=nil, uri=nil, ns={})
+    end
+
     ###
     # Called at the end of an element
     # +name+ is the tag name
@@ -70,6 +73,9 @@ class WikipediaExtractor
       end
       @name_stack.pop
       @text_stack.pop
+    end
+
+    def end_element_namespace(name, prefix=nil, uri=nil)
     end
 
     ###
