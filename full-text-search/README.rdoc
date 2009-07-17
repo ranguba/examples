@@ -1,0 +1,65 @@
+= はじめに
+
+== 名前
+
+ぐるん検索
+
+== 説明
+
+ActiveGroongaを使った全文検索Webアプリケーションです。
+
+複数の文書元を串刺し検索できるようになる予定です。現在は、
+日本語版Wikipediaのデータにしか対応していません。
+
+== 作者
+
+Kouhei Sutou <kou@clear-code.com>
+
+== ライセンス
+
+* コア部分: LGPL 2.1。詳しくはlicense/LGPLを見てください。
+* test/fixtures/wikipedia/: GFDL 1.2またはそれ以降のバージョ
+  ン。テストデータは以下からダウンロードできるデータから抽出
+  しています。
+  http://ja.wikipedia.org/wiki/Wikipedia:%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89
+
+== 依存ライブラリ
+
+* ActiveGroonga
+* Rails 2.3.2
+
+== インストール
+
+まずActiveGroongaとRailsをインストールします。
+
+  % sudo gem install activegroonga
+  % sudo gem install rails --version "=2.3.2"
+
+Wikipedia日本語版のデータをダウンロードします。
+
+  % wget -c http://download.wikimedia.org/jawiki/latest/jawiki-latest-pages-articles.xml.bz2 &
+
+ダウンロードには時間がかかるのでこの間にgroongaデータベースを
+準備します。ActiveGroongaにはActiveRecordと同じようにマイグレー
+ションの仕組みがあります。groonga:migrateタスクを実行すると
+groongaデータベースを作成できます。
+
+  % rake groonga:migrate
+
+Wikipedia日本語版のデータをgroongaに登録するスクリプト
+script/register-wikipedia-dataがあるので、それを使ってデータ
+を登録します。このスクリプトは最初の1000件だけを登録するので、
+途中までダウンロードしている段階でもデータは登録できます。
+
+  % bzcat jawiki-latest-pages-articles.xml.bz2 | script/register-wikipedia-data
+
+あとは通常のRailsアプリケーションと同様に起動します。
+
+  % script/server
+
+http://localhost:3000/にアクセスして検索してみてください。
+
+== 他の情報
+
+[ActiveGroonga]
+  http://groonga.rubyforge.org/
