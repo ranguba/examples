@@ -5,10 +5,10 @@ class CreateUsers < ActiveGroonga::Migration
       t.string :name
 
       t.timestamps
-
-      t.index :original_id
-      t.index :name
     end
+
+    add_index_column :terms, :users, :original_id
+    add_index_column :terms, :users, :name
   end
 
   def self.down

@@ -9,10 +9,10 @@ class CreateDocuments < ActiveGroonga::Migration
       t.references :source
 
       t.timestamps
-
-      t.index :title
-      t.index :content
     end
+
+    add_index_column :terms, :documents, :title
+    add_index_column :terms, :documents, :content
   end
 
   def self.down
