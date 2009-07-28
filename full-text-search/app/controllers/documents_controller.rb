@@ -24,7 +24,22 @@ class DocumentsController < ApplicationController
 
   def search
     before = Time.now
-    @documents = Document.find_all_by_content(params[:query], :limit => 20)
+    words = params[:query].to_s.split
+    if words.empty?
+      @documents = []
+    else
+      @documents = Document.find(:all, :limit => 20) do |record|
+        expression = nil
+        words.each do |word|
+          if expression.nil?
+            expression = record.content =~ word
+          else
+            expression &= record.content =~ word
+          end
+        end
+        expression
+      end
+    end
     @elapsed = Time.now - before
   end
 end
