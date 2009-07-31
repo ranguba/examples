@@ -4,7 +4,12 @@
   <p>
     <span class="keyword"><%= h(params[:query]) %></span>の検索結果:
     <span class="total-entries"><%= @total_entries %></span>件中
-    <span class="display-range"><%= @offset + 1 %>-<%= @offset + @documents.size %></span>件（<%= @elapsed %>秒）
+    <span class="display-range">
+      <%= @total_entries.zero? ? 0 : @offset + 1 %>
+      -
+      <%= @offset + @documents.size %>
+    </span>
+    件（<%= @elapsed %>秒）
   </p>
 </div>
 
