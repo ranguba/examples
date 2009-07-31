@@ -62,9 +62,17 @@ p.snippet span.separator
   font-weight: bold;
 }
 
-span.keyword
+span.keyword,
+span.total-entries,
+span.display-range
 {
   font-weight: bold;
+}
+
+div.pagination
+{
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 p.metadata

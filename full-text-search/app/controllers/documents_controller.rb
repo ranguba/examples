@@ -23,12 +23,19 @@ class DocumentsController < ApplicationController
   end
 
   def search
+    @page = [params[:page].to_i, 1].max
+    @per_page = (params[:per_page] || 20).to_i
+    @per_page = 20 if @per_page < 0
+    @per_page = [@per_page, 100].min
     before = Time.now
     words = params[:query].to_s.split
     if words.empty?
       @documents = []
     else
-      @documents = Document.find(:all, :limit => 20) do |record|
+      options = {:limit => @per_page}
+      @offset = (@page - 1) * @per_page
+      options[:offset] = @offset if @offset > 0
+      options[:expression] = Proc.new do |record|
         expression = nil
         words.each do |word|
           if expression.nil?
@@ -39,6 +46,8 @@ class DocumentsController < ApplicationController
         end
         expression
       end
+      @total_entries = Document.count(options[:expression])
+      @documents = Document.find(:all, options)
     end
     @elapsed = Time.now - before
   end

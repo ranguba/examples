@@ -3,7 +3,8 @@
 <div class="search-summary">
   <p>
     <span class="keyword"><%= h(params[:query]) %></span>の検索結果:
-    上位<%= h(@documents.size) %>件を表示（<%= @elapsed %>秒）
+    <span class="total-entries"><%= @total_entries %></span>件中
+    <span class="display-range"><%= @offset + 1 %>-<%= @offset + @documents.size %></span>件（<%= @elapsed %>秒）
   </p>
 </div>
 
@@ -32,5 +33,14 @@
   </div>
 <% end %>
 </div>
+
+<% unless @documents.empty? -%>
+  <%= will_paginate(@documents.paginate(:page => @page,
+					:per_page => @per_page,
+					:total_entries => @total_entries),
+                    :previous_label => "<前",
+                    :next_label => "次>") %>
+</div>
+<% end -%>
 
 <%= render(:partial => "sources") %>
