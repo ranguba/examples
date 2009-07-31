@@ -38,8 +38,8 @@
   <%= will_paginate(@documents.paginate(:page => @page,
 					:per_page => @per_page,
 					:total_entries => @total_entries),
-                    :previous_label => "<前",
-                    :next_label => "次>") %>
+                    :previous_label => h("<前"),
+                    :next_label => h("次>")) %>
 </div>
 <% end -%>
 
