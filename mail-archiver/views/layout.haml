@@ -1,0 +1,30 @@
+!!! XML
+!!! 1.1
+%html{:xmlns => 'http://www.w3.org/1999/xhtml',
+      :"xml:lang" => "ja",
+      :lang => "ja"}
+  %head
+    %meta{:"http-equiv" => "Content-Type",
+          :content => "text/html; charset=UTF-8"}
+    %meta{:name => "Author", :content => "ラングバプロジェクト"}
+    %link{:rel => "start", :titel => "Home", :href => "/"}
+    %link{:rel => "stylesheet",
+          :href => "style.css",
+          :type => "text/css"}
+    -# %link{:rel => "shotcut icon", :href => "/favicon.ico"}
+    -# %link{:rel => "icon", :href => "/favicon.png"}
+    %title メール検索
+
+  %body
+    #container
+      #header
+        %h1 メール検索
+      #content
+        =yield
+
+      #sidebar
+        %ul
+          %li Home
+
+      #footer Powered by groonga.
+
