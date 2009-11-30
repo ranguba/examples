@@ -24,15 +24,10 @@ class Archiver
     message = @messages.add
     message["subject"] = to_utf8(mail.subject.value)
     message["date"] = Time.parse(mail.date.value)
-    from = mail.from.send(:tree).addresses[0]
-    from_person = @people[from.address] || @people.add(from.address)
-    from_name = from.display_name
-    if from_name
-      from_name = to_utf8(from_name)
-      from_name = @names.add(:value => from_name)
-    end
-    from_person.append("names", from_name) if from_name
-    message["from"] = from_person
+
+    register_address(message, "from", mail.from)
+    register_addresses(message, "to", mail.to)
+
     if mail.multipart?
       mail.parts.each_with_index do |part, i|
         if i.zero?
@@ -57,6 +52,29 @@ class Archiver
   def to_utf8(string)
     return nil if string.nil?
     NKF.nkf("-w", string)
+  end
+
+  def register_address(message, key, address_list)
+    register_addresses(message, key, address_list) do |person|
+      message[key] = person
+    end
+  end
+
+  def register_addresses(message, key, address_list, &block)
+    address_list.send(:tree).addresses.each do |address|
+      person = @people[address.address] || @people.add(address.address)
+      name = address.display_name
+      if name
+        name = to_utf8(name)
+        name = @names.add(:value => name)
+      end
+      person.append("names", name) if name
+      if block
+        yield(person)
+      else
+        message.append(key, person)
+      end
+    end
   end
 end
 
