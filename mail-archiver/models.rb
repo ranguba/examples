@@ -32,13 +32,35 @@ module Models
           table.short_text("names", :type => :vector)
         end
 
-        schema.create_table("mails",
-                            :type => :hash,
+        schema.create_table("attachments") do |table|
+          table.short_text("name")
+          table.short_text("content_type")
+          table.text("text")
+          table.unsigned_integer("size")
+        end
+
+        schema.create_table("headers",
+                            :type => :patricia_trie,
                             :key_type => "ShortText") do |table|
+          table.short_text("value")
+        end
+
+        schema.create_table("mails") do |table|
           table.short_text("subject")
-          table.text("content")
-          table.reference("sender", "people")
-          table.reference("recipients", "people", :type => :vector)
+          table.time("date")
+          table.time("received_date")
+          table.reference("from", "people")
+          table.reference("to", "people", :type => :vector)
+          table.reference("cc", "people", :type => :vector)
+          table.reference("bcc", "people", :type => :vector)
+          table.reference("reply_to", "people", :type => :vector)
+          table.short_text("return_path", :type => :vector)
+          table.short_text("message_id")
+          table.short_text("in_reply_to")
+          table.short_text("references", :type => :vector)
+          table.reference("headers", "headers", :type => :vector)
+          table.text("body")
+          table.unsigned_integer("size")
         end
 
         schema.create_table("terms",
@@ -48,8 +70,11 @@ module Models
                             :sub_records => true,
                             :default_tokenizer => "TokenBigram") do |table|
           table.index("mails.subject")
-          table.index("mails.content")
+          table.index("mails.body")
+          table.index("headers.value")
           table.index("people.names")
+          table.index("attachments.name")
+          table.index("attachments.text")
         end
       end
     end

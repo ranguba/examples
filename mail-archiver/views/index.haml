@@ -1,1 +1,7 @@
 %h2 メール一覧
+
+.mails
+  - @mails.each do |mail|
+    .mail
+      %h3
+        %a{"href" => "/#{mail.id}"}&= mail["subject"]
