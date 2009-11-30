@@ -4,8 +4,7 @@ body {
 	background:url(images/page_bg.jpg) top left repeat-x #e2e2e2;
 	margin:0;
 	padding: 0 20px;
-	font-family:arial,  helvetica, sans-serif;
-	font-size:9pt;
+	font-family: arial, helvetica, sans-serif;
 	color:#333;
 }
 
@@ -36,6 +35,7 @@ body {
   bottom: -20px;
   padding: 0;
   margin: 0;
+  font-size: smaller;
 }
 
 #header ul.menu li
@@ -77,13 +77,11 @@ body {
 
 #content h2 {
 	color:#060;
-	font-size:18pt;
 	border-bottom:1px solid #ccc;
 }
 
 #content h3 {
 	color:#333;
-	font-size:12pt;
 }
 
 #photos {
@@ -157,7 +155,7 @@ body {
 	background:#77a13d;
 	padding:10px;
 	color:#fff;
-	font-size:8pt;
+	font-size: smaller;
 	text-align:center;
 }
 
@@ -174,4 +172,37 @@ span.keyword
 {
   color: #040;
   font-weight: bold;
+}
+
+ol.mails li
+{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+dl.headers
+{
+  padding-bottom: 5px;
+  margin-top: 10px;
+  color: gray;
+  border-bottom: 2px solid #77a13d;
+}
+
+dl.headers dt
+{
+  clear: both;
+  float: left;
+  text-align: right;
+  width: 5em;
+}
+
+dl.headers dd
+{
+  font-weight: bold;
+  margin-left: 5.5em;
+}
+
+pre.body
+{
+  clear: both;
 }

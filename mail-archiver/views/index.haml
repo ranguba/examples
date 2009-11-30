@@ -1,7 +1,6 @@
 %h2 メール一覧
 
-.mails
+%ol.mails
   - @mails.each do |mail|
-    .mail
-      %h3
-        %a{"href" => "/#{mail.id}"}&= mail["subject"]
+    %li
+      %a{"href" => "/#{mail.id}"}&= mail["subject"]

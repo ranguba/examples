@@ -26,10 +26,14 @@ module Models
     def ensure_schema
       context = Groonga::Context.default
       Groonga::Schema.define do |schema|
+        schema.create_table("names") do |table|
+          table.short_text("value")
+        end
+
         schema.create_table("people",
                             :type => :hash,
                             :key_type => "ShortText") do |table|
-          table.short_text("names", :type => :vector)
+          table.reference("names", "names", :type => :vector)
         end
 
         schema.create_table("attachments") do |table|
@@ -72,7 +76,7 @@ module Models
           table.index("mails.subject")
           table.index("mails.body")
           table.index("headers.value")
-          table.index("people.names")
+          table.index("names.value")
           table.index("attachments.name")
           table.index("attachments.text")
         end
