@@ -1,3 +1,4 @@
+-# -*- indent-tabs-mode: nil -*-
 !!! XML
 !!! 1.1
 %html{:xmlns => 'http://www.w3.org/1999/xhtml',
@@ -9,7 +10,7 @@
     %meta{:name => "Author", :content => "ラングバプロジェクト"}
     %link{:rel => "start", :titel => "Home", :href => "/"}
     %link{:rel => "stylesheet",
-          :href => "style.css",
+          :href => "/style.css",
           :type => "text/css"}
     -# %link{:rel => "shotcut icon", :href => "/favicon.ico"}
     -# %link{:rel => "icon", :href => "/favicon.png"}
@@ -19,12 +20,15 @@
     #container
       #header
         %h1 メール検索
+        %ul.menu
+          %li
+            %a{:href => "/"} 一覧
+          %li
+            %form{:action => "/search/", :method => "get"}
+              %input{:type => "text", :name => "query",
+                     :class => "query-form", :value => params[:query]}
+              %input{:type => "submit",  :value => "検索"}
       #content
         =yield
 
-      #sidebar
-        %ul
-          %li Home
-
       #footer Powered by groonga.
-

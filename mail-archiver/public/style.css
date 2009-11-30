@@ -3,15 +3,14 @@
 body {
 	background:url(images/page_bg.jpg) top left repeat-x #e2e2e2;
 	margin:0;
-	padding:0;
+	padding: 0 20px;
 	font-family:arial,  helvetica, sans-serif;
 	font-size:9pt;
 	color:#333;
 }
 
 #container {
-	width:760px;
-	margin:20px auto 20px auto;
+        margin:20px auto;
 	border:1px solid #000;
 	background:#fff;
 }
@@ -19,7 +18,8 @@ body {
 #header {
 	height:80px;
 	background:url(images/header_bg.jpg) top left repeat-x #a0da2b;
-	border-bottom:10px solid #77a13d;
+	border-bottom:20px solid #77a13d;
+        position: relative;
 }
 
 #header h1 {
@@ -29,10 +29,43 @@ body {
 	padding:40px 10px 10px 10px;
 }
 
+#header ul.menu
+{
+  position: absolute;
+  right: 10px;
+  bottom: -20px;
+  padding: 0;
+  margin: 0;
+}
+
+#header ul.menu li
+{
+  display: inline;
+  color: white;
+}
+
+#header ul.menu li a
+{
+  color: white;
+}
+
+#header ul.menu li a:hover
+{
+  background: #66902c;
+}
+
+#header ul.menu li form
+{
+  display: inline;
+}
+
+#header ul.menu li input.query-form
+{
+  width: 10em;
+}
+
 #content {
-	width:500px;
 	padding:10px;
-	float:right;
 }
 
 #content h1, h2, h3, h4 {
@@ -86,7 +119,6 @@ body {
 	padding:0;
 	border-bottom:1px solid #ccc;
 }
-	 
 
 #sidebar ul li {
 	margin:0;
@@ -117,7 +149,7 @@ body {
 	text-align:center;
 	margin:10px 0 0 0;
 	font-size:8pt;
-}	
+}
 
 #footer {
 	clear:both;
@@ -136,4 +168,10 @@ a {
 
 a:hover {
 	background:#FFFFDD;
+}
+
+span.keyword
+{
+  color: #040;
+  font-weight: bold;
 }
