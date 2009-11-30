@@ -15,6 +15,7 @@ class Archiver
     @messages = @context["messages"]
     @people = @context["people"]
     @names = @context["names"]
+    @attachments = @context["attachments"]
   end
 
   def feed(path)
@@ -32,11 +33,29 @@ class Archiver
     end
     from_person.append("names", from_name) if from_name
     message["from"] = from_person
-    message["body"] = to_utf8(mail.body.raw_source)
+    if mail.multipart?
+      mail.parts.each_with_index do |part, i|
+        if i.zero?
+          message["text"] = to_utf8(part.body.decoded)
+          message["raw"] = part.body.raw_source
+        else
+          attachment = @attachments.add
+          attachment["filename"] = to_utf8(part.filename)
+          attachment["content_type"] = part.content_type.value
+          attachment["text"] = to_utf8(part.body.decoded)
+          attachment["raw"] = part.body.raw_source
+          message.append("attachments", attachment)
+        end
+      end
+    else
+      message["text"] = to_utf8(mail.body.decoded)
+      message["raw"] = mail.body.raw_source
+    end
   end
 
   private
   def to_utf8(string)
+    return nil if string.nil?
     NKF.nkf("-w", string)
   end
 end

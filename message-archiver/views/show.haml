@@ -11,4 +11,8 @@
   %dt 送信日
   %dd&= @message["date"]
 
-%pre.body= highlight(@message["body"])
+%pre.text= highlight(@message["text"])
+
+%ul.attachments
+  - @message["attachments"].each do |attachment|
+    %li&= attachment["filename"]

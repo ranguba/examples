@@ -27,27 +27,27 @@ class Searcher < Sinatra::Base
   get "/search/" do
     @query = params[:query]
     @messages = @messages.select do |record|
-      record["body"].match(@query)
+      record["text"].match(@query)
     end
     haml :search
   end
 
   private
-  def highlight(body)
+  def highlight(text)
     query = params[:query]
-    return html_escape(body) if query.nil?
+    return html_escape(text) if query.nil?
 
     expression_builder = Groonga::RecordExpressionBuilder.new(@messages, nil)
     expression_builder.query = query
-    expression_builder.default_column = "body"
+    expression_builder.default_column = "text"
     expression = expression_builder.build
     _snippet = expression.snippet([["<span class=\"keyword\">", "</span>"]],
-                                  :width => body.size,
+                                  :width => text.size,
                                   :html_escape => true,
                                   :normalize => true)
-    segments = _snippet.execute(body)
+    segments = _snippet.execute(text)
     if segments.empty?
-      html_escape(body)
+      html_escape(text)
     else
       segments.join
     end
@@ -60,6 +60,6 @@ class Searcher < Sinatra::Base
                                   :html_escape => true,
                                   :normalize => true)
     separator = "\n<span class='separator'>...</span>\n"
-    _snippet.execute(record["body"]).join(separator)
+    _snippet.execute(record["text"]).join(separator)
   end
 end

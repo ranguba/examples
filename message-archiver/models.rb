@@ -37,15 +37,15 @@ module Models
         end
 
         schema.create_table("attachments") do |table|
-          table.short_text("name")
+          table.short_text("filename")
           table.short_text("content_type")
           table.text("text")
+          table.text("raw")
           table.unsigned_integer("size")
         end
 
-        schema.create_table("headers",
-                            :type => :patricia_trie,
-                            :key_type => "ShortText") do |table|
+        schema.create_table("headers") do |table|
+          table.short_text("name")
           table.short_text("value")
         end
 
@@ -63,8 +63,10 @@ module Models
           table.short_text("in_reply_to")
           table.short_text("references", :type => :vector)
           table.reference("headers", "headers", :type => :vector)
-          table.text("body")
+          table.text("text")
+          table.text("raw")
           table.unsigned_integer("size")
+          table.reference("attachments", "attachments", :type => :vector)
         end
 
         schema.create_table("terms",
@@ -74,10 +76,10 @@ module Models
                             :sub_records => true,
                             :default_tokenizer => "TokenBigram") do |table|
           table.index("messages.subject")
-          table.index("messages.body")
+          table.index("messages.text")
           table.index("headers.value")
           table.index("names.value")
-          table.index("attachments.name")
+          table.index("attachments.filename")
           table.index("attachments.text")
         end
       end

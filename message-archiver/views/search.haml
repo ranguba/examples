@@ -4,5 +4,5 @@
   - @messages.each do |message|
     .message
       %h3
-        %a{"href" => "/#{message.id}?query=#{@query}"}&= message["subject"]
+        %a{"href" => "/#{message.key.id}?query=#{@query}"}&= message["subject"]
       %p.snippet= snippet(message)
