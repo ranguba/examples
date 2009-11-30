@@ -37,19 +37,19 @@ class Archiver
       mail.parts.each_with_index do |part, i|
         if i.zero?
           message["text"] = to_utf8(part.body.decoded)
-          message["raw"] = part.body.raw_source
+          message["raw"] = part.body.decoded
         else
           attachment = @attachments.add
           attachment["filename"] = to_utf8(part.filename)
           attachment["content_type"] = part.content_type.value
           attachment["text"] = to_utf8(part.body.decoded)
-          attachment["raw"] = part.body.raw_source
+          attachment["raw"] = part.body.decoded
           message.append("attachments", attachment)
         end
       end
     else
       message["text"] = to_utf8(mail.body.decoded)
-      message["raw"] = mail.body.raw_source
+      message["raw"] = mail.body.decoded
     end
   end
 

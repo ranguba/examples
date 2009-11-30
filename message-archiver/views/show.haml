@@ -15,4 +15,5 @@
 
 %ul.attachments
   - @message["attachments"].each do |attachment|
-    %li&= attachment["filename"]
+    %li
+      %a{:href => "/#{@message.id}/download/#{attachment.id}/#{attachment["filename"]}"}&= attachment["filename"]

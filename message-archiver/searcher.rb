@@ -24,6 +24,24 @@ class Searcher < Sinatra::Base
     haml :show
   end
 
+  get "/:id/download/:attachment_id/:filename" do |id, attachment_id, filename|
+    @message = Groonga::Record.new(@messages, Integer(id))
+    attachment_id = Integer(attachment_id)
+    _attachment = @message["attachments"].find do |__attachment|
+      __attachment.id == attachment_id
+    end
+
+    if _attachment
+      content_type(_attachment["content_type"])
+      raw = _attachment["raw"]
+      response["Content-Length"] = raw.size.to_s
+      attachment(_attachment["filename"])
+      raw
+    else
+      not_found
+    end
+  end
+
   get "/search/" do
     @query = params[:query]
     @messages = @messages.select do |record|
