@@ -11,22 +11,22 @@ class Searcher < Sinatra::Base
   set :static, true
 
   before do
-    @mails = Groonga::Context.default["mails"]
+    @messages = Groonga::Context.default["messages"]
   end
 
   get "/" do
-    @mails = @mails.sort([["date", :descending]])
+    @messages = @messages.sort([["date", :descending]])
     haml :index
   end
 
   get "/:id" do |id|
-    @mail = Groonga::Record.new(@mails, Integer(id))
+    @message = Groonga::Record.new(@messages, Integer(id))
     haml :show
   end
 
   get "/search/" do
     @query = params[:query]
-    @mails = @mails.select do |record|
+    @messages = @messages.select do |record|
       record["body"].match(@query)
     end
     haml :search
@@ -37,7 +37,7 @@ class Searcher < Sinatra::Base
     query = params[:query]
     return html_escape(body) if query.nil?
 
-    expression_builder = Groonga::RecordExpressionBuilder.new(@mails, nil)
+    expression_builder = Groonga::RecordExpressionBuilder.new(@messages, nil)
     expression_builder.query = query
     expression_builder.default_column = "body"
     expression = expression_builder.build

@@ -1,8 +1,8 @@
 %h2 検索結果
 
 .result
-  - @mails.each do |mail|
-    .mail
+  - @messages.each do |message|
+    .message
       %h3
-        %a{"href" => "/#{mail.id}?query=#{@query}"}&= mail["subject"]
-      %p.snippet= snippet(mail)
+        %a{"href" => "/#{message.id}?query=#{@query}"}&= message["subject"]
+      %p.snippet= snippet(message)

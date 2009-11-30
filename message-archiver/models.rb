@@ -49,7 +49,7 @@ module Models
           table.short_text("value")
         end
 
-        schema.create_table("mails") do |table|
+        schema.create_table("messages") do |table|
           table.short_text("subject")
           table.time("date")
           table.time("received_date")
@@ -73,8 +73,8 @@ module Models
                             :key_normalize => true,
                             :sub_records => true,
                             :default_tokenizer => "TokenBigram") do |table|
-          table.index("mails.subject")
-          table.index("mails.body")
+          table.index("messages.subject")
+          table.index("messages.body")
           table.index("headers.value")
           table.index("names.value")
           table.index("attachments.name")

@@ -1,14 +1,14 @@
-%h2&= @mail["subject"]
+%h2&= @message["subject"]
 
 %dl.headers
   %dt 送信者
-  %dd &nbsp;#{html_escape(@mail[".from.names.value"])}
+  %dd &nbsp;#{html_escape(@message[".from.names.value"])}
   %dt 受信者
   %dd
     &nbsp;
-    - @mail["to"].each do |to|
+    - @message["to"].each do |to|
       = to
   %dt 送信日
-  %dd&= @mail["date"]
+  %dd&= @message["date"]
 
-%pre.body= highlight(@mail["body"])
+%pre.body= highlight(@message["body"])
