@@ -14,6 +14,7 @@ class Archiver
     @context = Groonga::Context.default
     @messages = @context["messages"]
     @people = @context["people"]
+    @addresses = @context["addresses"]
     @names = @context["names"]
     @attachments = @context["attachments"]
   end
@@ -62,13 +63,33 @@ class Archiver
 
   def register_addresses(message, key, address_list, &block)
     address_list.send(:tree).addresses.each do |address|
-      person = @people[address.address] || @people.add(address.address)
+      existing_addresses = @addresses.select do |record|
+        record["value"] == address.address
+      end
+
+      if existing_addresses.size.zero?
+        _address = @addresses.add(:value => address.address)
+      else
+        _address = existing_addresses.to_a[0].key
+      end
+      existing_people = @people.select do |record|
+        record[".addresses.value"] == address.address
+      end
+
+      if existing_people.size.zero?
+        person = @people.add
+        person.append("addresses", _address)
+      else
+        person = existing_people.to_a[0].key
+      end
+
       name = address.display_name
       if name
         name = to_utf8(name)
         name = @names.add(:value => name)
       end
       person.append("names", name) if name
+
       if block
         yield(person)
       else

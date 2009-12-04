@@ -4,13 +4,12 @@
   %dt 送信者
   %dd
     &= @message[".from.names.value"]
-    &= "<#{@message[".from._key"]}>"
+    &= "<#{@message[".from.addresses.value"]}>"
   %dt 受信者
   %dd
     - @message["to"].each do |to|
       &= to[".names.value"]
-      &= "<#{to["_key"].inspect}>"
-      , 
+      &= "<#{to[".addresses.value"]}>"
   %dt 送信日
   %dd&= @message["date"]
 

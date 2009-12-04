@@ -30,9 +30,12 @@ module Models
           table.short_text("value")
         end
 
-        schema.create_table("people",
-                            :type => :hash,
-                            :key_type => "ShortText") do |table|
+        schema.create_table("addresses") do |table|
+          table.short_text("value")
+        end
+
+        schema.create_table("people") do |table|
+          table.reference("addresses", "addresses", :type => :vector)
           table.reference("names", "names", :type => :vector)
         end
 
@@ -79,6 +82,7 @@ module Models
           table.index("messages.text")
           table.index("headers.value")
           table.index("names.value")
+          table.index("addresses.value")
           table.index("attachments.filename")
           table.index("attachments.text")
         end
