@@ -44,9 +44,11 @@ class Searcher < Sinatra::Base
 
   get "/search/" do
     @query = params[:query]
+    before = Time.now
     @messages = @messages.select do |record|
       record["text"].match(@query)
     end
+    @elapsed = Time.now - before
     haml :search
   end
 
