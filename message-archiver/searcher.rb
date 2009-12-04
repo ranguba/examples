@@ -47,7 +47,7 @@ class Searcher < Sinatra::Base
     before = Time.now
     @messages = @messages.select do |record|
       record["text"].match(@query)
-    end
+    end.sort([["_score", :desc]])
     @elapsed = Time.now - before
     haml :search
   end

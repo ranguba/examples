@@ -206,3 +206,10 @@ pre.text
 {
   clear: both;
 }
+
+p.snippet
+{
+  font-family: monospace;
+  margin-left: 2em;
+  max-width: 40em;
+}
